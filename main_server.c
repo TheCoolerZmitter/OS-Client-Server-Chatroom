@@ -192,38 +192,6 @@ void broadcast(int fromfd, char* message)
 			else if(strlen(message) == 1) {
 				sprintf(buffer, "\x1b[0m%s(%s) has left the room!\n", sender->username, inet_ntoa(cliaddr.sin_addr));
 			}
-			else if(strlen(message) > 3 && message[0] == 'S' && message[1] == 'E' && message[2] == 'N' && message[3] == 'D') {
-				char* token = strtok(message, " ");
-				char* user = strtok(NULL, " ");
-				char* file = strtok(NULL, " ");
-				
-				//printf("%s\n", file);
-				
-				USR* cur = rooms[fromfd % NUMROOMS].head;
-				while (cur != NULL) {
-					if (strcmp(cur->username, user) == 0) {
-						cur->fileFlag = 1;
-						
-						// prepare message
-						int nmsg = strlen(message);
-						
-						// send!
-						int nsen = send(cur->clisockfd / 100, message, nmsg, 0);
-						if (nsen != nmsg) error("ERROR send() failed");
-						
-						memset(buffer, 0, sizeof(buffer));
-						// prepare message
-						sprintf(buffer, "\x1b[0m%s(%s) wants to send you a file (Y/N): ", sender->username, inet_ntoa(cliaddr.sin_addr));
-						nmsg = strlen(buffer) - 1;
-
-						// send!
-						nsen = send(cur->clisockfd / 100, buffer, nmsg, 0);
-						if (nsen != nmsg) error("ERROR send() failed");
-						return;
-					}
-
-					cur = cur->next;
-				}
 				sprintf(buffer, "User does not exist\n");
 				int nmsg = strlen(buffer) - 1;
 				int nsen = send(fromfd / 100, buffer, nmsg, 0);
