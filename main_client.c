@@ -84,14 +84,6 @@ void* thread_main_send(void* args)
 			if (n < 0) error("ERROR writing to socket");
 			break; // we stop transmission when user type empty string
 		}
-		else if(strlen(buffer) > 3 && buffer[0] == 'S' && buffer[1] == 'E' && buffer[2] == 'N' && buffer[3] == 'D') {
-			char bufferTheSequel[256];
-			strcpy(bufferTheSequel, buffer);
-			
-			char* token = strtok(bufferTheSequel, " ");
-			char* user = strtok(NULL, " ");
-			char* file = strtok(NULL, " ");
-		}
 		n = send(sockfd, buffer, strlen(buffer), 0);
 		if (n < 0) error("ERROR writing to socket");
 		printf("\n");
