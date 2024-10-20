@@ -1,4 +1,4 @@
-To make the files in an Ubuntu Linux terminal, make must be installed ("sudo apt install make" or "sudo apt install build-essential"), then type "make".
+To make the files in an Ubuntu Linux terminal, "make" must be installed ("sudo apt install make" or "sudo apt install build-essential"), then type "make".
 Alternatively, you can run the commands in the makefile manually.
 Once the files are made, enter "./main_server" to start the server program.
 
